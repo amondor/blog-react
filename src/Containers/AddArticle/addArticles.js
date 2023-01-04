@@ -1,7 +1,10 @@
 import React from 'react'
 
+import Form from '../../Components/Form/Form'
 export default function addArticles() {
   return (
-    <div>addArticles</div>
+    <>
+    <Form/>
+    </>
   )
 }
