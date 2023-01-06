@@ -5,15 +5,17 @@ import AddArticles from "./Containers/AddArticle/addArticles";
 import Contact from "./Containers/Contact/Contact";
 import Article from "./Containers/Article/Article";
 
+
 function App() {
   return (
     <>
       <Navbar />
       <Routes>
+        
         <Route path="/" element={<Home />} />
         <Route path="ecrire/" element={<AddArticles />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/article" element={<Article />} />
+        <Route path="/articles/:slug" element={<Article />} />
       </Routes>
       
     </>
