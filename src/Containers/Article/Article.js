@@ -3,8 +3,7 @@ import { useLocation } from "react-router-dom";
 import './article.css'
 export default function Article() {
   const location = useLocation()
-  console.log(location)
-  
+
  
 
 

@@ -1,37 +1,33 @@
-import React, { useState } from "react";
+import React, { useState ,useRef } from "react";
 import { useDispatch } from "react-redux";
 import "./Form.css";
 export default function Form() {
-  const [article, setArticle] = useState({
-    title: "",
-    body: "",
-  });
+  
 
   const dispatch = useDispatch();
   const handleForm = (e) => {
     e.preventDefault();
+
+    const newArticle = {
+      title :inputsRef.current[0].value,
+      body: inputsRef.current[1].value,
+    }
+
     dispatch ({
       type:'ADDARTICLE',
-      payload:article
+      payload:newArticle
     })
-    setArticle({
-      title:"",
-      body:""
-    })
+    e.target.reset()
    };
 
+  const inputsRef = useRef([]);
+  const addRefs = el =>{
+    if(el && !inputsRef.current.includes(el)){
+      inputsRef.current.push(el)
+    }
+  }
    
 
-  const handleInputs = (e) => {
-    if(e.target.classList.contains('inp-title')){
-        const newObjState = {...article, title: e.target.value};
-        setArticle(newObjState);
-    }
-    else if(e.target.classList.contains('inp-body')){
-        const newObjState = {...article, body: e.target.value};
-        setArticle(newObjState);
-    }
-  };
 
   return (
     <>
@@ -39,17 +35,15 @@ export default function Form() {
       <form onSubmit={handleForm} className="container-form">
         <label htmlFor="title">Titre</label>
         <input
-          onChange={handleInputs}
-          value={article.title}
-          ype="text"
+          ref={addRefs}
+          type="text"
           id="title"
           placeholder="Entrez votre nom"
           className="inp-title"
         />
         <label htmlFor="title">Votre article</label>
         <textarea
-          onChange={handleInputs}
-          value={article.body}
+          ref={addRefs}
           id="article"
           placeholder="Votre article"
           className="inp-body"
